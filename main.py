@@ -36,11 +36,16 @@ def processCommand(command):
         webbrowser.open("https://www.telegram.com")
     elif command.lower().startswith("play"):
         result = " ".join(command.lower().split(" ")[1:])
+        speak(f"playing {result}")
         musicplayer.player(result)
     elif "increase volume" in command.lower():
         increase_volume()
+        speak("Increased volume to 10%")
     elif "decrease volume" in command.lower():
         decrease_volume()
+        speak("Decreased volume to 10%")
+    elif "assalam walekum" in command.lower():
+        speak("Waalayikum, Assalam!. Khayiriyet?")
 
 
 def speak(text):
