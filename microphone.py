@@ -3,13 +3,13 @@ import speech_recognition as sr
 while True:
     # listen for the wake up word 
         r = sr.Recognizer()
-        print("recognizing")
+        # print("recognizing")
         # recognize speech using Sphinx
         try:    
             with sr.Microphone() as source:
                 print("Listning.....")
                 audio = r.listen(source,timeout=2)
-                print("recognizing")
+            print("recognizing")
             word = (r.recognize_google(audio))
             print(word)
 
