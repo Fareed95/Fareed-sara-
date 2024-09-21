@@ -1,7 +1,10 @@
 import textwrap
 import google.generativeai as genai
 from IPython.display import display, Markdown
+from dotenv import load_dotenv 
+import os 
 
+load_dotenv()
 # Function to convert text to Markdown format
 def bot_gemini(user_input):
     def to_markdown(text):
@@ -9,7 +12,7 @@ def bot_gemini(user_input):
         return Markdown(textwrap.indent(text, '> ', predicate=lambda _: True))
 
     # Set your API key directly (replace with your actual API key)
-    GOOGLE_API_KEY = 'AIzaSyDLW0ZzUp32rgwCYVMsnTGNwuhn1ZOTels'
+    GOOGLE_API_KEY = os.getenv('GOOGLE_API_KEY')
 
     genai.configure(api_key=GOOGLE_API_KEY)
 

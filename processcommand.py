@@ -23,15 +23,23 @@ def speak(text):
 
 def microphone(phrase_time_limit):
     try:
-        with sr.Microphone() as source:
-            print("Listning.....")
-            audio = r.listen(source,timeout=2,phrase_time_limit=phrase_time_limit)
-        word = (r.recognize_google(audio))
-        print("recognizing")
+        with sr.Microphone(device_index=1) as source:
+            print("Listening.....")
+            audio = r.listen(source, timeout=2, phrase_time_limit=phrase_time_limit)
+        word = r.recognize_google(audio)
+        print("Recognizing...")
         print(word)
         return word
-    except Exception as e :
-        print(e)
+    except sr.UnknownValueError:
+        print("Could not understand audio.")
+        return ""
+    except sr.RequestError as e:
+        print(f"Could not request results; {e}")
+        return ""
+    except Exception as e:
+        print(f"Error: {e}")
+        return ""
+
 
 
 def processCommand(command):
@@ -88,11 +96,11 @@ def processCommand(command):
         speak("Waalayikum, Assalam!. Khayiriyet?")
 
     elif "note" in command.lower() and "mummy" in command.lower():
-        file_saver(r'C:\Users\Admin\OneDrive - RizviCollegeOfEngineering\Documents\Saara documents','mummy_work.txt',text_remover_mummy(command.lower()))
+        file_saver(r'/home/fareed-sayed/Documents/MERI SAARA/','mummy_work.txt',text_remover_mummy(command.lower()))
         speak(f"Noted! {text_remover_mummy(command.lower())} in mummy_work.txt")
         
     elif "note" in command.lower():
-        file_saver(r'C:\Users\Admin\OneDrive - RizviCollegeOfEngineering\Documents\Saara documents','important_work.txt',text_remover(command.lower()))
+        file_saver(r'/home/fareed-sayed/Documents/MERI SAARA/','important_work.txt',text_remover(command.lower()))
         speak(f"Noted! {text_remover_mummy(command.lower())} in important_work.txt")
     elif "file explorer" in command.lower():
         explorer_path = "C:\\Windows\\explorer.exe"
